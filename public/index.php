@@ -25,6 +25,10 @@ $elephant->threatenedLevel = 'LC';
 
 $animals = [$lion, $parrot, $elephant];
 
+echo $lion->speak('fr');
+echo $lion->speak('en');
+echo $lion->speak();
+
 /***************************************/
 /***************************************/
 
