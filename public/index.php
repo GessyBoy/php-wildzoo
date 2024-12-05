@@ -18,6 +18,8 @@ $elephant->setThreatenedLevel('LC');
 
 $animals = [$lion, $parrot, $elephant];
 
+echo var_dump($elephant);
+
 /***************************************/
 /***************************************/
 

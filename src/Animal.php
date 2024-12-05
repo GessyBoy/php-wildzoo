@@ -2,6 +2,21 @@
 
 class Animal
 {
+
+    public const CENTIMETERS_IN_METER = 100;
+    public const SIZE_UNIT_CHANGE_LIMIT = 100;
+    public const THREATENED_LEVELS = [
+        'NE',  // Not Evaluated
+        'DD',  // Data Deficient
+        'LC',  // Least Concern
+        'NT',  // Near Threatened
+        'VU',  // Vulnerable
+        'EN',  // Endangered
+        'CR',  // Critically Endangered
+        'EW',  // Extinct in the Wild
+        'EX',  // Extinct
+    ];
+
     private string $name;
     private float $size = 100;
     private bool $carnivorous = false;
@@ -33,6 +48,22 @@ class Animal
         $this->size = $size;
     }
 
+    public function getSizeWithUnit() :string
+
+{
+
+    if($this->getSize() < self::SIZE_UNIT_CHANGE_LIMIT) {
+
+        return $this->getSize() . 'cm';     
+
+    } else {
+
+        return ($this->getSize() / self::CENTIMETERS_IN_METER) . 'm';
+
+    }
+
+}
+
     public function getPawNumber(): int
     {
         return $this->pawNumber;
@@ -53,6 +84,11 @@ class Animal
 
     public function setThreatenedLevel(string $threatenedLevel): void
     {
+        if (in_array($threatenedLevel, self::THREATENED_LEVELS)) {
+            $this->threatenedLevel = $threatenedLevel ;
+        } else {
+            throw new Exception("Niveau de menace invalide : $threatenedLevel. Valeurs acceptées : " . implode(', ', self::THREATENED_LEVELS));
+        }
         $this->threatenedLevel = $threatenedLevel;
     }
 
