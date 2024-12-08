@@ -1,5 +1,6 @@
 <?php
 
+namespace App;
 class Animal
 {
     public const CENTIMETERS_IN_METER = 100;
