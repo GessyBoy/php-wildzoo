@@ -2,6 +2,10 @@
 
 namespace App;
 
+use Exception;
+use UnexpectedValueException;
+use RuntimeException;
+
 class Animal
 {
     public const CENTIMETERS_IN_METER = 100;
@@ -31,12 +35,18 @@ class Animal
     }
 
     public function setSize(float $size): void
-    {
-        if ($size < 0) {
-            $size = 0;
-        }
 
-        $this->size = $size;
+    {
+
+	    if ($size < 0) {
+
+	        throw new Exception('The size should be a positive number');
+
+	    }
+
+
+	    $this->size = $size;
+
     }
 
     public function getPawNumber(): int
@@ -59,9 +69,17 @@ class Animal
 
     public function setThreatenedLevel(string $threatenedLevel = 'NE'): void
     {
-        if (in_array($threatenedLevel, self::THREATENED_LEVELS)) {
-            $this->threatenedLevel = $threatenedLevel;
+        // Vérification si le niveau de menace n'existe pas dans la liste définie
+        if (!in_array($threatenedLevel, self::THREATENED_LEVELS)) {
+            throw new UnexpectedValueException('Invalid threatened level: ' . $threatenedLevel);
         }
+
+        // Lancer une exception si le niveau est EX (extinction)
+        if ($threatenedLevel === 'EX') {
+            throw new RuntimeException('Attention, le ' . $this->getName() . ' ne devrait pas être là si l\'espèce est éteinte !');
+        }
+
+        $this->threatenedLevel = $threatenedLevel;
     }
 
     public function isCarnivorous(): bool

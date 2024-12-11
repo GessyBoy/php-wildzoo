@@ -16,22 +16,47 @@ use App\Mammal;
 use App\Snake;
 use App\Spider;
 
-$elephant = new Mammal('elephant');
-$elephant->setThreatenedLevel('LC');
-$elephant->setSize(400);
+$errors = [];
+$smallErrors = [];
+
+try {
+    $elephant = new Mammal('elephant');
+    $elephant->setThreatenedLevel('InvalidLevel');
+    $elephant->setSize(400);
+} catch (UnexpectedValueException $e) {
+    $errors[] = $e->getMessage();
+} catch (RuntimeException $e) {
+    $smallErrors[] = $e->getMessage();
+}
 
 $lion = new Felid('lion');
-$lion->setSize(100);
-$lion->setThreatenedLevel('VU');
+try {
+    $lion->setSize(100);
+} catch(Exception $exception) {
+    $errors[] = $exception->getMessage();
+}
+
+try {
+    $lion->setThreatenedLevel('EX');
+} catch (UnexpectedValueException $e) {
+    $errors[] = $e->getMessage();
+} catch (RuntimeException $e) {
+    $smallErrors[] = $e->getMessage();
+}
 
 $tiger = new Felid('tiger');
-$tiger->setSize(150);
-$tiger->setThreatenedLevel('EN');
+try {
+    $tiger->setSize(150);
+    $tiger->setThreatenedLevel('EN');
+} catch (UnexpectedValueException $e) {
+    $errors[] = $e->getMessage();
+} catch (RuntimeException $e) {
+    $smallErrors[] = $e->getMessage();
+}
 
 $zebra = new Equid('zebra');
 $zebra->setSize(120);
 $zebra->setThreatenedLevel('EN');
-
 $parrot = new Bird('parrot');
 $parrot->setSize(30);
 
