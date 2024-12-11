@@ -11,15 +11,15 @@ use App\Area\Jungle;
 use App\Animal\Equid;
 use App\Animal\Felid;
 use App\Animal\Snake;
-use App\Animal\Animal;
 use App\Animal\Insect;
 use App\Animal\Mammal;
 use App\Animal\Spider;
 use App\Area\Aquarium;
 use App\Animal\Arachnide;
 use App\Animal\Crocodilian;
-
-$abstractAnimal = new Animal('abstract', 0);
+use App\Animal\Fish;
+use App\Area\Box;
+use App\Area\Cage;
 
 $elephant = new Mammal('elephant');
 try {
@@ -70,7 +70,9 @@ $scorpio->setCarnivorous(true);
 $bee = new Insect('bee');
 $bee->setSize(2);
 
-$animals = [$abstractAnimal, $elephant, $lion, $tiger, $zebra, $parrot, $alligator, $python, $scorpio, $tarentula, $bee];
+$shark = new Fish('shark');
+
+$animals = [$elephant, $lion, $tiger, $zebra, $parrot, $alligator, $python, $scorpio, $tarentula, $bee, $shark];
 
 try {
     $jungle = new Jungle('jungle');
@@ -83,9 +85,20 @@ try {
     $desert->addAnimal($scorpio);
 
     $aquarium = new Aquarium('aquarium');
-    $aquarium->addAnimal($alligator);
+    $aquarium->addAnimal($shark);
 
-    $areas = [$aquarium, $jungle, $desert];
+    // Ajout des animaux dans la Box (animaux de taille < 50)
+    $box = new Box('box');
+    $box->addAnimal($parrot); // Taille : 30
+    $box->addAnimal($scorpio); // Taille : 15
+    $box->addAnimal($bee); // Taille : 2
+
+    // Ajout des animaux dans la Cage (animaux dangereux)
+    $cage = new Cage('cage');
+    $cage->addAnimal($lion); // Dangereux
+    $cage->addAnimal($tiger); // Dangereux
+
+    $areas = [$aquarium, $jungle, $desert, $box, $cage];
 } catch (Exception $exception) {
     $errors[] = $exception->getMessage();
 }
