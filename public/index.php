@@ -19,6 +19,13 @@ use App\Area\Aquarium;
 use App\Animal\Arachnide;
 use App\Animal\Crocodilian;
 use App\Animal\Fish;
+use App\Animal\Parrot;
+use App\Animal\Penguin;
+use App\Animal\Ostrich;
+use App\Animal\Duck;
+use App\Animal\Bat;
+use App\Flyable;
+use App\Swimmable;
 
 $elephant = new Mammal('elephant');
 try {
@@ -50,8 +57,15 @@ $zebra = new Equid('zebra');
 $zebra->setSize(120);
 $zebra->setThreatenedLevel('EN');
 
-$parrot = new Bird('parrot');
-$parrot->setSize(30);
+$parrot = new Parrot('parrot');
+
+$penguin = new Penguin('penguin');
+
+$ostrich = new Ostrich('ostrich');
+
+$duck = new Duck('duck');
+
+$bat = new Bat('bat');
 
 $alligator = new Fish('shark');
 $alligator->setSize(180);
@@ -59,7 +73,7 @@ $alligator->setSize(180);
 $python = new Snake('python');
 $python->setSize(300);
 
-$tarentula = new Spider('tarentula');
+$tarentula = new Spider('tarantula');
 $tarentula->setSize(10);
 
 $scorpio = new Arachnide('scorpio');
@@ -69,7 +83,7 @@ $scorpio->setCarnivorous(true);
 $bee = new Insect('bee');
 $bee->setSize(2);
 
-$animals = [$elephant, $lion, $tiger, $zebra, $parrot, $alligator, $python, $scorpio, $tarentula, $bee];
+$animals = [$parrot, $penguin, $ostrich, $duck, $bat, $elephant, $lion, $tiger, $zebra, $parrot, $alligator, $python, $scorpio, $tarentula, $bee];
 
 try {
     $jungle = new Jungle('jungle');
@@ -88,6 +102,7 @@ try {
 } catch (Exception $exception) {
     $errors[] = $exception->getMessage();
 }
+
 
 /***************************************/
 /***************************************/
